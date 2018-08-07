@@ -1,15 +1,13 @@
 //
-//  ViewController.h
+//  EarningsView.h
 //  ReatchAllDeliveryBoy
 //
-//  Created by PASHA on 22/06/18.
+//  Created by PASHA on 09/07/18.
 //  Copyright © 2018 Pasha. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface EarningsView : UIViewController
 
 @end
-

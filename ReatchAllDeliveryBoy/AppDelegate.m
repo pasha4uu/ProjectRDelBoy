@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "RearTBView.h"
+#import "SlideNavigationController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,34 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main"
+                                                             bundle: nil];
+    
+    
+    RearTBView *leftMenu = (RearTBView*)[mainStoryboard
+                                                                    instantiateViewControllerWithIdentifier: @"RearTBView"];
+    
+    [SlideNavigationController sharedInstance].leftMenu = leftMenu;
+    [SlideNavigationController sharedInstance].menuRevealAnimationDuration = .18;
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:SlideNavigationControllerDidClose object:nil queue:nil usingBlock:^(NSNotification *note) {
+        NSString *menu = note.userInfo[@"menu"];
+        NSLog(@"Closed %@", menu);
+    }];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:SlideNavigationControllerDidOpen object:nil queue:nil usingBlock:^(NSNotification *note) {
+        NSString *menu = note.userInfo[@"menu"];
+        NSLog(@"Opened %@", menu);
+    }];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:SlideNavigationControllerDidReveal object:nil queue:nil usingBlock:^(NSNotification *note) {
+        NSString *menu = note.userInfo[@"menu"];
+        NSLog(@"Revealed %@", menu);
+    }];
+    
+
+    
     return YES;
 }
 
